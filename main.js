@@ -64,20 +64,30 @@ const buildDOmString = (studentArray) => {
   let domString = '';
   studentArray.forEach((student)=> {
     domString += `<div class="card">`;
-    domString += `<h1>${student.firstName} ${student.lastName}</h1>`;
-    domString += `<h3>${student.catchPhrase}</h3>`;
-    domString += `<img src="${student.avatar}" alt="">`;
-    domString += `<button class="card-button">Brought Pie</button>`;
+    domString +=   `<h1>${student.firstName} ${student.lastName}</h1>`;
+    domString +=   `<h3>${student.catchPhrase}</h3>`;
+    domString +=   `<img src="${student.avatar}" alt="">`;
+    domString +=   `<button class="card-button">Brought Pie</button>`;
     domString += `</div>`;
   });
   printToDom(domString, 'card-holder');
 };
 
-buildDOmString(students);
-
-const allTheButtons = document.getElementsByClassName('card-button');
-for(let i = 0; i < allTheButtons.length; i++) {
-  allTheButtons[i].addEventListener('click', (e) => {
-    console.log('event!!!!!!!', e);
-  });
+const addAllEventListeners = () => {
+  const allTheButtons = document.getElementsByClassName('card-button');
+  for(let i = 0; i < allTheButtons.length; i++) {
+    allTheButtons[i].addEventListener('click', changeNameToGreen);
+  };
 };
+
+const changeNameToGreen = (e) => {
+  const nameOFStudent = e.target.parentNode.children[0];
+  nameOFStudent.classList.add('green');
+};
+
+const startApplication = () => {
+  buildDOmString(students);
+  addAllEventListeners();
+};
+
+startApplication();
